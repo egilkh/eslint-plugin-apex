@@ -1,7 +1,7 @@
 {
-  "name": "eslint-plugin-nestjs-apex",
+  "name": "eslint-plugin-apex",
   "version": "0.0.1",
-  "description": "Eslint rules for nestjs in APEX",
+  "description": "ESLint rules for APEX",
   "scripts": {
     "clean": "rm -Rf ./dist/",
     "build:ci": "npm run build",
@@ -22,7 +22,7 @@
   "homepage": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/egilkh/eslint-plugin-nestjs-apex.git"
+    "url": "https://github.com/egilkh/eslint-plugin-apex.git"
   },
   "engines": {
     "node": ">=16"
