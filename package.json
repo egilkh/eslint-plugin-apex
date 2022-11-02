@@ -22,7 +22,7 @@
   "homepage": "",
   "repository": {
     "type": "git",
-    "url": "git@github.com:egilkh/eslint-plugin-nestjs-apex.git"
+    "url": "https://github.com/egilkh/eslint-plugin-nestjs-apex.git"
   },
   "engines": {
     "node": ">=16"
