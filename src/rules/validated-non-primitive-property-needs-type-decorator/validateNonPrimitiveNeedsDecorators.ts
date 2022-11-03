@@ -1,9 +1,9 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import {
   AST_NODE_TYPES,
-  TSESTree,
   ESLintUtils,
   TSESLint,
+  TSESTree,
 } from '@typescript-eslint/utils';
 import { createRule } from '../../utils/createRule';
 import { typedTokenHelpers } from '../../utils/typedTokenHelpers';
@@ -27,13 +27,13 @@ const rule = createRule({
   meta: {
     docs: {
       description:
-        'A non-primitve property with validation should probably use a @Type decorator',
+        'A non-primitive property with validation should probably use a @Type decorator',
       recommended: false,
       requiresTypeChecking: false,
     },
     messages: {
       shouldUseTypeDecorator:
-        'A non-primitve property with validation should probably use a @Type decorator',
+        'A non-primitive property with validation should probably use a @Type decorator',
     },
     schema: [
       {
