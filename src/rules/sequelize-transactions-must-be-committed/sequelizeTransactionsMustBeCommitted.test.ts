@@ -12,7 +12,7 @@ const ruleTester = new ESLintUtils.RuleTester({
   },
 });
 
-ruleTester.run('transactions-must-be-committed', rule, {
+ruleTester.run('sequelize-transactions-must-be-committed', rule, {
   valid: [
     {
       code: `class TestClass {
