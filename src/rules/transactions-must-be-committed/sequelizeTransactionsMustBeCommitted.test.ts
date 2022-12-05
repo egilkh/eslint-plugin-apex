@@ -1,6 +1,6 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
 import { getFixturesRootDirectory } from '../../testing/fixtureSetup';
-import rule from './transactionsMustBeCommitted';
+import rule from './sequelizeTransactionsMustBeCommitted';
 
 const tsRootDirectory = getFixturesRootDirectory();
 const ruleTester = new ESLintUtils.RuleTester({
@@ -72,7 +72,7 @@ ruleTester.run('transactions-must-be-committed', rule, {
             }`,
       errors: [
         {
-          messageId: 'transactionsMustBeCommitted',
+          messageId: 'sequelizeTransactionsMustBeCommitted',
         },
       ],
     },
@@ -94,7 +94,7 @@ ruleTester.run('transactions-must-be-committed', rule, {
             }`,
       errors: [
         {
-          messageId: 'transactionsMustBeCommitted',
+          messageId: 'sequelizeTransactionsMustBeCommitted',
         },
       ],
     },

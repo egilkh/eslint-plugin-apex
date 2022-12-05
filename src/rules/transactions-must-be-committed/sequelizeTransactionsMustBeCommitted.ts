@@ -2,7 +2,7 @@ import { TSESLint, TSESTree } from '@typescript-eslint/utils';
 import { createRule } from '../../utils/createRule';
 import { simpleTraverse } from '@typescript-eslint/typescript-estree';
 
-export const transactionsMustBeCommitted = (
+export const sequelizeTransactionsMustBeCommitted = (
   node: TSESTree.MethodDefinition,
 ): boolean => {
   let didFindTransaction = false;
@@ -46,7 +46,7 @@ export const transactionsMustBeCommitted = (
 };
 
 const rule = createRule({
-  name: 'transactions-must-be-committed',
+  name: 'sequelize-transactions-must-be-committed',
   meta: {
     docs: {
       description:
@@ -55,7 +55,7 @@ const rule = createRule({
       requiresTypeChecking: false,
     },
     messages: {
-      transactionsMustBeCommitted:
+      sequelizeTransactionsMustBeCommitted:
         'A transaction must be committed and rolled back',
     },
     schema: [],
@@ -66,16 +66,16 @@ const rule = createRule({
 
   create(
     context: Readonly<
-      TSESLint.RuleContext<'transactionsMustBeCommitted', never[]>
+      TSESLint.RuleContext<'sequelizeTransactionsMustBeCommitted', never[]>
     >,
   ) {
     return {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       MethodDefinition(node: TSESTree.MethodDefinition): void {
-        if (transactionsMustBeCommitted(node)) {
+        if (sequelizeTransactionsMustBeCommitted(node)) {
           context.report({
             node: node,
-            messageId: 'transactionsMustBeCommitted',
+            messageId: 'sequelizeTransactionsMustBeCommitted',
           });
         }
       },

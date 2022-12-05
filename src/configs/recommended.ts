@@ -6,6 +6,6 @@ export = {
     'nestjs-apex/api-method-should-specify-api-response': 'error',
     'nestjs-apex/class-named-service-should-have-injectable-decorator': 'error',
     'nestjs-apex/class-named-guard-should-have-injectable-decorator': 'error',
-    'nestjs-apex/transactions-must-be-committed': 'error',
+    'nestjs-apex/sequelize-transactions-must-be-committed': 'error',
   },
 };
