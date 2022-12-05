@@ -52,6 +52,39 @@ ruleTester.run('sequelize-transactions-must-be-committed', rule, {
                 }
             }`,
     },
+    {
+      code: `class TestClass {
+                public create(dto: CreateDto, transaction?: Transaction): Promise<string[]> {
+                
+                functionCall(transaction);
+                }
+            }`,
+    },
+    {
+      code: `class TestClass {
+                  async read(fileId: FileId, transaction?: Transaction): Promise<File | null> {
+                      if (!fileId) {
+                        return null;
+                      }
+
+                      const readFile = await File.findByPk(fileId, {
+                        include: [
+                          {
+                            model: Folder,
+                            required: false,
+                          },
+                        ],
+                        transaction,
+                      });
+
+                      if (!readFile) {
+                        return null;
+                      }
+
+                      return readFile;
+                    }
+            }`,
+    },
   ],
   invalid: [
     {
