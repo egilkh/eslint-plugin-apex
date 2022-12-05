@@ -8,10 +8,14 @@ export const sequelizeTransactionsMustBeCommitted = (
   let didFindTransaction = false;
 
   simpleTraverse(node, {
-    enter: (node) => {
+    enter: (node, parent) => {
+      const isParentMemberExpression =
+        parent?.type === TSESTree.AST_NODE_TYPES.MemberExpression;
+
       if (
         node?.type === TSESTree.AST_NODE_TYPES.Identifier &&
-        node?.name === 'transaction'
+        node?.name === 'transaction' &&
+        isParentMemberExpression
       ) {
         didFindTransaction = true;
       }
