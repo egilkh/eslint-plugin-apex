@@ -1,6 +1,7 @@
 import apiMethodsShouldSpecifyApiResponse from './api-method-should-specify-api-response/apiMethodsShouldSpecifyApiResponse';
 import classNamedGuardShouldHaveInjectableDecorator from './class-named-guard-should-have-injectable-decorator/classNamedGuardShouldHaveInjectableDecorator';
 import classNamedServiceShouldHaveInjectableDecorator from './class-named-service-should-have-injectable-decorator/classNamedServiceShouldHaveInjectableDecorator';
+import sequelizeTransactionsMustBeCommitted from './transactions-must-be-committed/sequelizeTransactionsMustBeCommitted';
 
 const allRules = {
   'api-method-should-specify-api-response': apiMethodsShouldSpecifyApiResponse,
@@ -8,6 +9,7 @@ const allRules = {
     classNamedServiceShouldHaveInjectableDecorator,
   'class-named-guard-should-have-injectable-decorator':
     classNamedGuardShouldHaveInjectableDecorator,
+  'transactions-must-be-committed': sequelizeTransactionsMustBeCommitted,
 };
 
 export default allRules;
