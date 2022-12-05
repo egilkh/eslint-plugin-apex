@@ -9,7 +9,8 @@ const allRules = {
     classNamedServiceShouldHaveInjectableDecorator,
   'class-named-guard-should-have-injectable-decorator':
     classNamedGuardShouldHaveInjectableDecorator,
-  'transactions-must-be-committed': sequelizeTransactionsMustBeCommitted,
+  'sequelize-transactions-must-be-committed':
+    sequelizeTransactionsMustBeCommitted,
 };
 
 export default allRules;
