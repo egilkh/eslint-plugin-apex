@@ -12,7 +12,7 @@ const allRules = {
     classNamedGuardShouldHaveInjectableDecorator,
   'sequelize-transactions-must-be-committed':
     sequelizeTransactionsMustBeCommitted,
-  'branded-properties-should-have-api-property-with-type':
+  'branded-properties-should-have-api-property-decorator-with-type':
     brandedPropertyShouldHaveApiPropertyDecoratorWithType,
 };
 

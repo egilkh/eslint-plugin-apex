@@ -27,8 +27,7 @@ const rule = createRule({
       {
         properties: {
           fileEndings: {
-            description:
-              'files/paths to be analyzed (only for provided injectable or controller)',
+            description: 'file endings to match files to analyze',
             type: 'array',
             minItems: 1,
             items: {
@@ -67,9 +66,10 @@ const rule = createRule({
       PropertyDefinition(node: TSESTree.PropertyDefinition): void {
         const fileName = context.getFilename();
 
-        const isFileThatShouldBeLinted = context.options[0].fileEndings.some(
-          (fileEnding) => fileName.endsWith(fileEnding),
-        );
+        const isFileThatShouldBeLinted =
+          context?.options[0]?.fileEndings?.some((fileEnding) =>
+            fileName.endsWith(fileEnding),
+          ) ?? false;
 
         if (!isFileThatShouldBeLinted) {
           return;

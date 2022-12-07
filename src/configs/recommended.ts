@@ -8,6 +8,11 @@ export = {
     'nestjs-apex/class-named-guard-should-have-injectable-decorator': 'error',
     'nestjs-apex/sequelize-transactions-must-be-committed': 'error',
     'nestjs-apex/branded-properties-should-have-api-property-decorator-with-type':
-      'error',
+      [
+        'error',
+        {
+          fileEndings: ['.dto.ts'],
+        },
+      ],
   },
 };
