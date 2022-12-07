@@ -1,6 +1,6 @@
 import { TSESTree } from '@typescript-eslint/utils';
 import { ParserServices } from '@typescript-eslint/parser';
-import ts from 'typescript';
+import ts, { Type } from 'typescript';
 import * as tsutils from 'tsutils';
 import { unionTypeParts } from 'tsutils';
 
@@ -221,5 +221,8 @@ export const typedTokenHelpers = {
     }
 
     return decorator.expression.callee.name === 'IsEnum';
+  },
+  areTypeFlagsSet(type: Type, flags: ts.TypeFlags[]): boolean {
+    return flags.every((flag) => tsutils.isTypeFlagSet(type, flag));
   },
 };
