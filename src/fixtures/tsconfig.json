@@ -12,6 +12,6 @@
     //     "../"
     // ],
   },
-  "include": ["file.ts"],
+  "include": [ "file.ts"],
   "exclude": ["dist", "src"]
 }

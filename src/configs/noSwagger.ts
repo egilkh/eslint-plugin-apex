@@ -4,5 +4,7 @@ export = {
   parserOptions: { sourceType: 'module' },
   rules: {
     'nestjs-typed/api-method-should-specify-api-response': 'off',
+    'nestjs-apex/branded-properties-should-have-api-property-decorator-with-type':
+      'off',
   },
 };

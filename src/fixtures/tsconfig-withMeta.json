@@ -13,6 +13,6 @@
     "example.controller.ts",
     "example.customprovider.ts",
     "example.providedClass.provider.ts",
-    "file.ts"
+    "file.ts",
   ]
 }
