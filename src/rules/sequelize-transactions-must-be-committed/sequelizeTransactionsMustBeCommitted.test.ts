@@ -61,6 +61,15 @@ ruleTester.run('sequelize-transactions-must-be-committed', rule, {
             }`,
     },
     {
+      // options transaction should be allowed to be passed
+      code: `class TestClass {
+                public create(dto: CreateDto, options?: CreateOptions): Promise<string[]> {
+                
+                functionCall(options?.transaction);
+                }
+            }`,
+    },
+    {
       code: `class TestClass {
                   async read(fileId: FileId, transaction?: Transaction): Promise<File | null> {
                       if (!fileId) {
