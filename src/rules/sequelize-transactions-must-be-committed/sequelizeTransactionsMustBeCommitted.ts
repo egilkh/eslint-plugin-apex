@@ -2,6 +2,16 @@ import { TSESLint, TSESTree } from '@typescript-eslint/utils';
 import { createRule } from '../../utils/createRule';
 import { simpleTraverse } from '@typescript-eslint/typescript-estree';
 
+const isParentMemberExpressionSequelize = (
+  node: TSESTree.MemberExpression,
+): boolean => {
+  if (node.object.type === TSESTree.AST_NODE_TYPES.Identifier) {
+    return node.object.name === 'sequelize';
+  }
+
+  return false;
+};
+
 export const sequelizeTransactionsMustBeCommitted = (
   node:
     | TSESTree.MethodDefinition
@@ -14,11 +24,14 @@ export const sequelizeTransactionsMustBeCommitted = (
     enter: (node, parent) => {
       const isParentMemberExpression =
         parent?.type === TSESTree.AST_NODE_TYPES.MemberExpression;
+      const isParentExpressionSequelize = isParentMemberExpression
+        ? isParentMemberExpressionSequelize(parent)
+        : false;
 
       if (
         node?.type === TSESTree.AST_NODE_TYPES.Identifier &&
         node?.name === 'transaction' &&
-        isParentMemberExpression
+        isParentExpressionSequelize
       ) {
         didFindTransaction = true;
       }
