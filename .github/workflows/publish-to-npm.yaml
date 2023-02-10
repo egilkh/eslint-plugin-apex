@@ -3,13 +3,13 @@ on:
   push:
     branches:
       - main
-      
+
 permissions:
   contents: write
   deployments: write
   issues: write
   pull-requests: write
-  
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: '18'
       - run: yarn
       - run: yarn test
       - run: yarn build
