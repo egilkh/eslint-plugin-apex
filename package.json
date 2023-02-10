@@ -25,7 +25,7 @@
     "url": "https://github.com/egilkh/eslint-plugin-nestjs-apex.git"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "files": [
     "dist",
