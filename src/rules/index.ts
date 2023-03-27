@@ -3,7 +3,7 @@ import classNamedGuardShouldHaveInjectableDecorator from './class-named-guard-sh
 import classNamedServiceShouldHaveInjectableDecorator from './class-named-service-should-have-injectable-decorator/classNamedServiceShouldHaveInjectableDecorator';
 import sequelizeTransactionsMustBeCommitted from './sequelize-transactions-must-be-committed/sequelizeTransactionsMustBeCommitted';
 import brandedPropertyShouldHaveApiPropertyDecoratorWithType from './branded-properties-should-have-api-property-decorator-with-type/brandedPropertyShouldHaveApiPropertyDecoratorWithType';
-import nonOptionalValidateNestedNeedsIsDefined from './non-optional-validate-nested-needs-is-defined/nonOptionalValidateNestedNeedsIsDefined';
+import validateNestedNeedsIsOptionalOrIsDefinedDecorator from './validate-nested-needs-is-optional-or-is-defined-decorator/validateNestedNeedsIsOptionalOrIsDefinedDecorator';
 
 const allRules = {
   'api-method-should-specify-api-response': apiMethodsShouldSpecifyApiResponse,
@@ -15,8 +15,8 @@ const allRules = {
     sequelizeTransactionsMustBeCommitted,
   'branded-properties-should-have-api-property-decorator-with-type':
     brandedPropertyShouldHaveApiPropertyDecoratorWithType,
-  'non-optional-validate-nested-needs-is-defined':
-    nonOptionalValidateNestedNeedsIsDefined,
+  'validate-nested-needs-is-optional-or-is-defined-decorator':
+    validateNestedNeedsIsOptionalOrIsDefinedDecorator,
 };
 
 export default allRules;

@@ -1,6 +1,6 @@
 import { ESLintUtils } from '@typescript-eslint/utils';
 import { getFixturesRootDirectory } from '../../testing/fixtureSetup';
-import rule from './nonOptionalValidateNestedNeedsIsDefined';
+import rule from './validateNestedNeedsIsOptionalOrIsDefinedDecorator';
 
 const tsRootDirectory = getFixturesRootDirectory();
 const ruleTester = new ESLintUtils.RuleTester({
@@ -14,6 +14,13 @@ const ruleTester = new ESLintUtils.RuleTester({
 
 ruleTester.run('non-optional-validate-nested-needs-is-defined', rule, {
   valid: [
+    {
+      code: `class TestClass {
+                @IsDefined()
+                @ValidateNested()
+                declare nonPrimitiveOptionalType?: SomeSpecialType[];
+            }`,
+    },
     {
       code: `class TestClass {
                 @IsString()
@@ -43,7 +50,7 @@ ruleTester.run('non-optional-validate-nested-needs-is-defined', rule, {
             }`,
       errors: [
         {
-          messageId: 'shouldUseIsDefinedDecorator',
+          messageId: 'shouldUseIsDefinedOrIsOptionalDecorator',
         },
       ],
     },
@@ -54,7 +61,7 @@ ruleTester.run('non-optional-validate-nested-needs-is-defined', rule, {
             }`,
       errors: [
         {
-          messageId: 'shouldUseIsDefinedDecorator',
+          messageId: 'shouldUseIsDefinedOrIsOptionalDecorator',
         },
       ],
     },
