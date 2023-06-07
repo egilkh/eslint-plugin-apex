@@ -2716,10 +2716,10 @@ eslint-plugin-import@2.27.5:
     semver "^6.3.0"
     tsconfig-paths "^3.14.1"
 
-eslint-plugin-jsdoc@44.2.5:
-  version "44.2.5"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-44.2.5.tgz#f3186f57f112a230b3b7af34bf236d207bc8d5d7"
-  integrity sha512-KtuhaYy2GmdY2IQE5t+1lup8O4P05c+V4gKcj45PCxFM0OxmRq2uQlfOS1AgYVgPYIBKGE86DxrbKP24HKpORA==
+eslint-plugin-jsdoc@46.2.5:
+  version "46.2.5"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-46.2.5.tgz#e13b00d83959d098ac2090e1b79fe9ec51c2adc8"
+  integrity sha512-Rmd0pb6S5fv9/lGbJMiVUZn56XvjKTGQoq9H5yfNjj6jcJHkTaq+Pqj2KHK/8EO01f8auFFy2kNL64cFisMEDw==
   dependencies:
     "@es-joy/jsdoccomment" "~0.39.4"
     are-docs-informative "^0.0.2"
@@ -2727,6 +2727,7 @@ eslint-plugin-jsdoc@44.2.5:
     debug "^4.3.4"
     escape-string-regexp "^4.0.0"
     esquery "^1.5.0"
+    is-builtin-module "^3.2.1"
     semver "^7.5.1"
     spdx-expression-parse "^3.0.1"
 
