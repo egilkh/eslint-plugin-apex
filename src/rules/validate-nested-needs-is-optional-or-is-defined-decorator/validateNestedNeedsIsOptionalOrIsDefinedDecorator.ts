@@ -6,7 +6,7 @@ const rule = createRule<
   [],
   'validateNestedNeedsIsOptionalOrIsDefinedDecorator'
 >({
-  name: 'validate-nested-property-needs-is-optional-or-is-defined',
+  name: 'validate-nested-needs-is-optional-or-is-defined',
   meta: {
     docs: {
       description:
