@@ -33,13 +33,12 @@ export const shouldUseApiResponseDecorator = (
   return hasApiMethodDecorator && !hasApiResponseDecorator;
 };
 
-const rule = createRule({
+const rule = createRule<[], 'shouldSpecifyApiResponse'>({
   name: 'api-method-should-specify-api-response',
   meta: {
     docs: {
       description:
         'Api methods should at least specify the expected OK response with @ApiOkResponse. But also add any error responses that might not be expected (e.g. 429)',
-      recommended: false,
       requiresTypeChecking: false,
     },
     messages: {

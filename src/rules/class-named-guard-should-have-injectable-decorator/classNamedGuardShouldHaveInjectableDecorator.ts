@@ -2,12 +2,11 @@ import { TSESLint, TSESTree } from '@typescript-eslint/utils';
 import { createRule } from '../../utils/createRule';
 import { doesClassDeclarationHaveDecorator } from '../../utils/doesClassHaveDecorator';
 
-const rule = createRule({
+const rule = createRule<[], 'classNamedGuardShouldHaveInjectableDecorator'>({
   name: 'class-named-guard-should-have-injectable-decorator',
   meta: {
     docs: {
       description: 'Class named Guard should have the Injectable() decorator.',
-      recommended: false,
       requiresTypeChecking: false,
     },
     messages: {

@@ -65,13 +65,12 @@ export const sequelizeTransactionsMustBeCommitted = (
   return !(didFindCommit && didFindRollback);
 };
 
-const rule = createRule({
+const rule = createRule<[], 'sequelizeTransactionsMustBeCommitted'>({
   name: 'sequelize-transactions-must-be-committed',
   meta: {
     docs: {
       description:
         'when using a sequelize.transaction ensure it will be committed and rolled back',
-      recommended: false,
       requiresTypeChecking: false,
     },
     messages: {

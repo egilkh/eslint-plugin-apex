@@ -1,22 +1,36 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { TSESTree, TSESLint, ESLintUtils } from '@typescript-eslint/utils';
+import { TSESTree, ESLintUtils } from '@typescript-eslint/utils';
 import { createRule } from '../../utils/createRule';
 import { typedTokenHelpers } from '../../utils/typedTokenHelpers';
 import { simpleTraverse } from '@typescript-eslint/typescript-estree';
 
-type Options = [
-  {
-    fileEndings: string[];
-  },
-];
+type ObjectType = 'object';
 
-const rule = createRule({
+const objectString: ObjectType = 'object';
+
+type ArrayType = 'array';
+
+const arrayString: ArrayType = 'array';
+
+type StringType = 'string';
+
+const stringString: StringType = 'string';
+
+interface Option {
+  fileEndings: string[];
+}
+
+type Options = Option;
+
+const rule = createRule<
+  Options[],
+  'brandedPropertyShouldHaveApiPropertyDecoratorWithType'
+>({
   name: 'branded-properties-should-have-api-property-decorator-with-type',
   meta: {
     docs: {
       description:
         'A property that has branded type must have api property decorator for swagger to be correct',
-      recommended: false,
       requiresTypeChecking: false,
     },
     messages: {
@@ -25,13 +39,14 @@ const rule = createRule({
     },
     schema: [
       {
+        type: objectString,
         properties: {
           fileEndings: {
             description: 'file endings to match files to analyze',
-            type: 'array',
+            type: arrayString,
             minItems: 1,
             items: {
-              type: 'string',
+              type: stringString,
               minLength: 1,
             },
           },
@@ -50,14 +65,7 @@ const rule = createRule({
     },
   ],
 
-  create(
-    context: Readonly<
-      TSESLint.RuleContext<
-        'brandedPropertyShouldHaveApiPropertyDecoratorWithType',
-        Options
-      >
-    >,
-  ) {
+  create(context) {
     const parserServices = ESLintUtils.getParserServices(context);
     const checker = parserServices?.program?.getTypeChecker();
 
