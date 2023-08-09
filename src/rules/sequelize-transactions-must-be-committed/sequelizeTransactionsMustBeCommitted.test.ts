@@ -12,6 +12,8 @@ const ruleTester = new RuleTester({
   },
 });
 
+`'' sdglksdg {} asdg () : Promise`;
+
 ruleTester.run('sequelize-transactions-must-be-committed', rule, {
   valid: [
     {
@@ -248,12 +250,12 @@ ruleTester.run('sequelize-transactions-must-be-committed', rule, {
       // should be invalid to omit committing in method
       code: `class TestClass {
                 public create(dto: CreateDto): Promise<string[]> {
-                    const transaction = await sequelize.transaction();
+                    const transaction = await this.sequelize.transaction();
                     
-                    const created = this.service.create(dto);
-                    
-                    return created;
                     try {
+                      const created = this.service.create(dto);
+                      
+                      return created;
                     } catch (e) {
                         await transaction.rollback();
                         

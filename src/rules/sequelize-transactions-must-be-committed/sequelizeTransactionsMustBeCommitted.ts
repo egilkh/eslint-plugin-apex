@@ -2,16 +2,6 @@ import { TSESLint, TSESTree } from '@typescript-eslint/utils';
 import { createRule } from '../../utils/createRule';
 import { simpleTraverse } from '@typescript-eslint/typescript-estree';
 
-const isParentMemberExpressionSequelize = (
-  node: TSESTree.MemberExpression,
-): boolean => {
-  if (node.object.type === TSESTree.AST_NODE_TYPES.Identifier) {
-    return node.object.name === 'sequelize';
-  }
-
-  return false;
-};
-
 export const sequelizeTransactionsMustBeCommitted = (
   node:
     | TSESTree.MethodDefinition
@@ -21,19 +11,25 @@ export const sequelizeTransactionsMustBeCommitted = (
   let didFindTransaction = false;
 
   simpleTraverse(node, {
-    enter: (node, parent) => {
-      const isParentMemberExpression =
-        parent?.type === TSESTree.AST_NODE_TYPES.MemberExpression;
-      const isParentExpressionSequelize = isParentMemberExpression
-        ? isParentMemberExpressionSequelize(parent)
-        : false;
+    enter: (enterNode) => {
+      if (enterNode.type === TSESTree.AST_NODE_TYPES.CallExpression) {
+        const firstArgument = enterNode?.arguments?.[0];
 
-      if (
-        node?.type === TSESTree.AST_NODE_TYPES.Identifier &&
-        node?.name === 'transaction' &&
-        isParentExpressionSequelize
-      ) {
-        didFindTransaction = true;
+        if (
+          !firstArgument ||
+          firstArgument.type === TSESTree.AST_NODE_TYPES.ObjectExpression
+        ) {
+          simpleTraverse(enterNode, {
+            enter: (childNode) => {
+              if (
+                childNode?.type === TSESTree.AST_NODE_TYPES.Identifier &&
+                childNode?.name === 'transaction'
+              ) {
+                didFindTransaction = true;
+              }
+            },
+          });
+        }
       }
     },
   });
@@ -89,7 +85,6 @@ const rule = createRule<[], 'sequelizeTransactionsMustBeCommitted'>({
     >,
   ) {
     return {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       MethodDefinition(node: TSESTree.MethodDefinition): void {
         if (sequelizeTransactionsMustBeCommitted(node)) {
           context.report({
