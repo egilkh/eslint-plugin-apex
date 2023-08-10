@@ -12,8 +12,6 @@ const ruleTester = new RuleTester({
   },
 });
 
-`'' sdglksdg {} asdg () : Promise`;
-
 ruleTester.run('sequelize-transactions-must-be-committed', rule, {
   valid: [
     {
@@ -242,6 +240,56 @@ ruleTester.run('sequelize-transactions-must-be-committed', rule, {
         async function create(dto: CreateDto, transaction?: Transaction): Promise<string[]> {
           functionCall(transaction);
         };
+      `,
+    },
+    {
+      // should be valid to pass a transaction as an object attribute in a param
+      code: `
+        async function create(dto: CreateDto, transaction?: Transaction): Promise<string[]> {
+          functionCall({transaction});
+        };
+      `,
+    },
+    {
+      // should be valid to pass a transaction as an object attribute in a with different name
+      code: `
+        async function create(dto: CreateDto, passedTransaction?: Transaction): Promise<string[]> {
+          functionCall({
+            transaction: passedTransaction
+           });
+        };
+      `,
+    },
+    {
+      // should be valid to pass transaction as object attribute in first param of sequelize function
+      code: `
+      class SomeClass {
+        async findByEmail(mail: string, transaction?: Transaction): Promise<User> {
+          return User.findOne({
+            where: {
+              mail,
+            },
+            rejectOnEmpty: new NotFoundException('Could not find User with given email'),
+            transaction,
+          });
+        } 
+      }
+      `,
+    },
+    {
+      // should be valid with transaction || null
+      code: `
+      class SomeClass {
+        async findByEmail(mail: string, transaction?: Transaction): Promise<User> {
+          return User.findOne({
+            where: {
+              mail,
+            },
+            rejectOnEmpty: new NotFoundException('Could not find User with given email'),
+            transaction: transaction || null,
+          });
+        } 
+      }
       `,
     },
   ],

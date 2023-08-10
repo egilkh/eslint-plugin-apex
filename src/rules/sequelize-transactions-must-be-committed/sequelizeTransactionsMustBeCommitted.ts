@@ -13,22 +13,14 @@ export const sequelizeTransactionsMustBeCommitted = (
   simpleTraverse(node, {
     enter: (enterNode) => {
       if (enterNode.type === TSESTree.AST_NODE_TYPES.CallExpression) {
-        const firstArgument = enterNode?.arguments?.[0];
+        const { callee } = enterNode;
 
         if (
-          !firstArgument ||
-          firstArgument.type === TSESTree.AST_NODE_TYPES.ObjectExpression
+          callee.type === TSESTree.AST_NODE_TYPES.MemberExpression &&
+          callee.property.type === TSESTree.AST_NODE_TYPES.Identifier &&
+          callee.property.name === 'transaction'
         ) {
-          simpleTraverse(enterNode, {
-            enter: (childNode) => {
-              if (
-                childNode?.type === TSESTree.AST_NODE_TYPES.Identifier &&
-                childNode?.name === 'transaction'
-              ) {
-                didFindTransaction = true;
-              }
-            },
-          });
+          didFindTransaction = true;
         }
       }
     },
