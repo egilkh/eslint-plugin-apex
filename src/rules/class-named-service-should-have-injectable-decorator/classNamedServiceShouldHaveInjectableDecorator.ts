@@ -2,13 +2,12 @@ import { TSESLint, TSESTree } from '@typescript-eslint/utils';
 import { createRule } from '../../utils/createRule';
 import { doesClassDeclarationHaveDecorator } from '../../utils/doesClassHaveDecorator';
 
-const rule = createRule({
+const rule = createRule<[], 'classNamedServiceShouldHaveInjectableDecorator'>({
   name: 'class-named-service-should-have-injectable-decorator',
   meta: {
     docs: {
       description:
         'Class named Service should have the Injectable() decorator.',
-      recommended: false,
       requiresTypeChecking: false,
     },
     messages: {

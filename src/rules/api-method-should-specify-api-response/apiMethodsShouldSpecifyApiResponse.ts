@@ -1,6 +1,3 @@
-// Import { getParserServices } from "@typescript-eslint/experimental-utils/dist/eslint-utils";
-// import * as tsutils from "tsutils";
-// import { getParserServices } from "@typescript-eslint/experimental-utils/dist/eslint-utils";
 import { TSESLint, TSESTree } from '@typescript-eslint/utils';
 import { createRule } from '../../utils/createRule';
 import { typedTokenHelpers } from '../../utils/typedTokenHelpers';
@@ -36,13 +33,12 @@ export const shouldUseApiResponseDecorator = (
   return hasApiMethodDecorator && !hasApiResponseDecorator;
 };
 
-const rule = createRule({
+const rule = createRule<[], 'shouldSpecifyApiResponse'>({
   name: 'api-method-should-specify-api-response',
   meta: {
     docs: {
       description:
         'Api methods should at least specify the expected OK response with @ApiOkResponse. But also add any error responses that might not be expected (e.g. 429)',
-      recommended: false,
       requiresTypeChecking: false,
     },
     messages: {

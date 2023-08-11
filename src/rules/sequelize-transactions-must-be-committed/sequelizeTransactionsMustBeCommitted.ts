@@ -2,16 +2,6 @@ import { TSESLint, TSESTree } from '@typescript-eslint/utils';
 import { createRule } from '../../utils/createRule';
 import { simpleTraverse } from '@typescript-eslint/typescript-estree';
 
-const isParentMemberExpressionSequelize = (
-  node: TSESTree.MemberExpression,
-): boolean => {
-  if (node.object.type === TSESTree.AST_NODE_TYPES.Identifier) {
-    return node.object.name === 'sequelize';
-  }
-
-  return false;
-};
-
 export const sequelizeTransactionsMustBeCommitted = (
   node:
     | TSESTree.MethodDefinition
@@ -21,19 +11,17 @@ export const sequelizeTransactionsMustBeCommitted = (
   let didFindTransaction = false;
 
   simpleTraverse(node, {
-    enter: (node, parent) => {
-      const isParentMemberExpression =
-        parent?.type === TSESTree.AST_NODE_TYPES.MemberExpression;
-      const isParentExpressionSequelize = isParentMemberExpression
-        ? isParentMemberExpressionSequelize(parent)
-        : false;
+    enter: (enterNode) => {
+      if (enterNode.type === TSESTree.AST_NODE_TYPES.CallExpression) {
+        const { callee } = enterNode;
 
-      if (
-        node?.type === TSESTree.AST_NODE_TYPES.Identifier &&
-        node?.name === 'transaction' &&
-        isParentExpressionSequelize
-      ) {
-        didFindTransaction = true;
+        if (
+          callee.type === TSESTree.AST_NODE_TYPES.MemberExpression &&
+          callee.property.type === TSESTree.AST_NODE_TYPES.Identifier &&
+          callee.property.name === 'transaction'
+        ) {
+          didFindTransaction = true;
+        }
       }
     },
   });
@@ -65,13 +53,12 @@ export const sequelizeTransactionsMustBeCommitted = (
   return !(didFindCommit && didFindRollback);
 };
 
-const rule = createRule({
+const rule = createRule<[], 'sequelizeTransactionsMustBeCommitted'>({
   name: 'sequelize-transactions-must-be-committed',
   meta: {
     docs: {
       description:
         'when using a sequelize.transaction ensure it will be committed and rolled back',
-      recommended: false,
       requiresTypeChecking: false,
     },
     messages: {
@@ -90,7 +77,6 @@ const rule = createRule({
     >,
   ) {
     return {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       MethodDefinition(node: TSESTree.MethodDefinition): void {
         if (sequelizeTransactionsMustBeCommitted(node)) {
           context.report({

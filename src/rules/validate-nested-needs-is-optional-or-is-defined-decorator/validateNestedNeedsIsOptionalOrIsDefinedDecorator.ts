@@ -1,18 +1,20 @@
 import { createRule } from '../../utils/createRule';
-import { TSESLint, TSESTree } from '@typescript-eslint/utils';
+import { TSESTree } from '@typescript-eslint/utils';
 import decoratorIsInArray from '../../utils/decoratorIsInArray';
 
-const rule = createRule({
-  name: 'validate-nested-property-needs-is-optional-or-is-defined',
+const rule = createRule<
+  [],
+  'validateNestedNeedsIsOptionalOrIsDefinedDecorator'
+>({
+  name: 'validate-nested-needs-is-optional-or-is-defined',
   meta: {
     docs: {
       description:
         'A non-optional property using @ValidateNested() should have @IsDefined().',
-      recommended: false,
       requiresTypeChecking: false,
     },
     messages: {
-      shouldUseIsDefinedOrIsOptionalDecorator:
+      validateNestedNeedsIsOptionalOrIsDefinedDecorator:
         'A non-optional property using @ValidateNested() should have @IsDefined().',
     },
     hasSuggestions: false,
@@ -21,11 +23,7 @@ const rule = createRule({
   },
   defaultOptions: [],
 
-  create(
-    context: Readonly<
-      TSESLint.RuleContext<'shouldUseIsDefinedOrIsOptionalDecorator', never[]>
-    >,
-  ) {
+  create(context) {
     return {
       PropertyDefinition(node: TSESTree.PropertyDefinition): void {
         const { decorators } = node;
@@ -63,7 +61,7 @@ const rule = createRule({
 
         context.report({
           node: node,
-          messageId: 'shouldUseIsDefinedOrIsOptionalDecorator',
+          messageId: 'validateNestedNeedsIsOptionalOrIsDefinedDecorator',
         });
       },
     };
