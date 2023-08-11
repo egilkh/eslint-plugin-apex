@@ -434,5 +434,51 @@ ruleTester.run('sequelize-transactions-must-be-committed', rule, {
         },
       ],
     },
+    {
+      // should be invalid to omit committing in anonymous function
+      code: `
+        const anonymousFunction = async function create(dto: CreateDto): Promise<string[]> {
+            const transaction = await sequelize.transaction();
+            
+            const created = this.service.create(dto);
+            
+            return created;
+            try {
+            } catch (e) {
+                await transaction.rollback();
+                
+                throw e;
+            }
+        }
+      `,
+      errors: [
+        {
+          messageId: 'sequelizeTransactionsMustBeCommitted',
+        },
+      ],
+    },
+    {
+      // should be invalid to omit rolling back in anonymous function
+      code: `
+        const anonymousFunction = async function create(dto: CreateDto): Promise<string[]> {
+            const transaction = await sequelize.transaction();
+            
+            const created = this.service.create(dto);
+            
+            await transaction.commit();
+            
+            return created;
+            try {
+            } catch (e) {
+                throw e;
+            }
+        }
+      `,
+      errors: [
+        {
+          messageId: 'sequelizeTransactionsMustBeCommitted',
+        },
+      ],
+    },
   ],
 });

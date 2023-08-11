@@ -4,9 +4,9 @@ import { simpleTraverse } from '@typescript-eslint/typescript-estree';
 
 export const sequelizeTransactionsMustBeCommitted = (
   node:
-    | TSESTree.MethodDefinition
+    | TSESTree.FunctionDeclaration
     | TSESTree.ArrowFunctionExpression
-    | TSESTree.FunctionDeclaration,
+    | TSESTree.FunctionExpression,
 ): boolean => {
   let didFindTransaction = false;
 
@@ -77,14 +77,6 @@ const rule = createRule<[], 'sequelizeTransactionsMustBeCommitted'>({
     >,
   ) {
     return {
-      MethodDefinition(node: TSESTree.MethodDefinition): void {
-        if (sequelizeTransactionsMustBeCommitted(node)) {
-          context.report({
-            node: node,
-            messageId: 'sequelizeTransactionsMustBeCommitted',
-          });
-        }
-      },
       ArrowFunctionExpression(node: TSESTree.ArrowFunctionExpression): void {
         if (sequelizeTransactionsMustBeCommitted(node)) {
           context.report({
@@ -94,6 +86,14 @@ const rule = createRule<[], 'sequelizeTransactionsMustBeCommitted'>({
         }
       },
       FunctionDeclaration(node: TSESTree.FunctionDeclaration): void {
+        if (sequelizeTransactionsMustBeCommitted(node)) {
+          context.report({
+            node: node,
+            messageId: 'sequelizeTransactionsMustBeCommitted',
+          });
+        }
+      },
+      FunctionExpression(node: TSESTree.FunctionExpression): void {
         if (sequelizeTransactionsMustBeCommitted(node)) {
           context.report({
             node: node,
