@@ -34,7 +34,7 @@
   "main": "dist/index.js",
   "types": "index.d.ts",
   "dependencies": {
-    "@typescript-eslint/scope-manager": "6.4.0",
+    "@typescript-eslint/scope-manager": "6.7.5",
     "@typescript-eslint/utils": "6.4.0",
     "eslint-module-utils": "2.8.0",
     "reflect-metadata": "0.1.13"
