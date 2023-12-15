@@ -54,7 +54,7 @@
     "class-validator": "^0.14",
     "eslint": "8.53.0",
     "eslint-config-prettier": "9.0.0",
-    "eslint-plugin-import": "2.29.0",
+    "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsdoc": "46.8.2",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "eslint-plugin-unicorn": "49.0.0",
