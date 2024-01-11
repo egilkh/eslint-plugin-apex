@@ -1329,10 +1329,10 @@
   dependencies:
     "@babel/types" "^7.20.7"
 
-"@types/eslint@8.44.9":
-  version "8.44.9"
-  resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-8.44.9.tgz#5799663009645637bd1c45b2e1a7c8f4caf89534"
-  integrity sha512-6yBxcvwnnYoYT1Uk2d+jvIfsuP4mb2EdIxFnrPABj5a/838qe5bGkNLFOiipX4ULQ7XVQvTxOh7jO+BTAiqsEw==
+"@types/eslint@8.56.2":
+  version "8.56.2"
+  resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-8.56.2.tgz#1c72a9b794aa26a8b94ad26d5b9aa51c8a6384bb"
+  integrity sha512-uQDwm1wFHmbBbCZCqAlq6Do9LYwByNZHWzXppSnay9SuwJ+VRbjkbLABer54kcPnMSlG6Fdiy2yaFXm/z9Z5gw==
   dependencies:
     "@types/estree" "*"
     "@types/json-schema" "*"
